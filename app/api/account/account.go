@@ -19,7 +19,7 @@ func Edit(ctx *gin.Context) {
 		rep.Error(ctx, rep.Err(err))
 		return
 	}
-	rep.Success(ctx, rep.Msg("操作成功"))
+	rep.Success(ctx, rep.Msg("操作成功"), rep.Data(data))
 	return
 }
 
@@ -39,18 +39,12 @@ func List(ctx *gin.Context) {
 }
 
 func Detail(ctx *gin.Context) {
-
 	var re request.AccountRequest
 	if err := ctx.ShouldBind(&re); err != nil {
 		rep.Error(ctx, rep.Err(err))
 		return
 	}
-	if one, err := service.NewAccount().Detail(&re); err != nil {
-		rep.Error(ctx, rep.Err(err))
-		return
-	} else {
-		rep.Success(ctx, rep.Data(one), rep.Msg("操作成功"))
-		return
-	}
-
+	one, err := service.NewAccount().Detail(&re)
+	rep.DataWithErr(ctx, err, one)
+	return
 }

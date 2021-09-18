@@ -30,7 +30,7 @@ type ScanResp struct {
 }
 type Message interface {
 	SetMessage(ctx *gin.Context, id string)
-	QrcodeCreate(token string, action string) (string, string)
+	QrcodeCreate(id string, action string) (string, string)
 }
 type wechatMessage struct {
 }

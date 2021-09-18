@@ -7,8 +7,7 @@ import (
 )
 
 type Data struct {
-	ImgUrl string `json:"imgUrl"`
-
+	ImgUrl  string `json:"imgUrl"`
 	RandStr string `json:"randStr"`
 }
 
@@ -20,9 +19,13 @@ func Token(ctx *gin.Context) {
 	service.NewMessage().SetMessage(ctx, id)
 }
 func QrcodeCreate(ctx *gin.Context) {
-	token := ctx.DefaultQuery("token", "znhjaldakljdfsdad")
+	id := ctx.DefaultQuery("id", "")
 	login := ctx.DefaultQuery("action", "login")
-	code, randStr := service.NewMessage().QrcodeCreate(token, login)
+	if len(id) == 0 || len(login) == 0 {
+		rep.ParameterError(ctx, rep.Msg("id action 参数必填"))
+		return
+	}
+	code, randStr := service.NewMessage().QrcodeCreate(id, login)
 	rep.Success(ctx, rep.Data(Data{
 		ImgUrl:  code,
 		RandStr: randStr,
