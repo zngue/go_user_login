@@ -7,7 +7,8 @@ import (
 )
 
 type Data struct {
-	ImgUrl  string `json:"imgUrl"`
+	ImgUrl string `json:"imgUrl"`
+
 	RandStr string `json:"randStr"`
 }
 
