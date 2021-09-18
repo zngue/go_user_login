@@ -44,6 +44,7 @@ func Detail(ctx *gin.Context) {
 		rep.Error(ctx, rep.Err(err))
 		return
 	}
+
 	one, err := service.NewAccount().Detail(&re)
 	rep.DataWithErr(ctx, err, one)
 	return
