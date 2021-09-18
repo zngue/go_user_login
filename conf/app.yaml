@@ -4,4 +4,3 @@ LoadConfig:
     micro:
     grpc:
     wechat:
-    wechat_appts:
