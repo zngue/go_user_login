@@ -1,0 +1,13 @@
+#孟工传媒信息
+wechat:
+    base:
+        appid: wxe5175784d94d5b6e
+        appsecret: 57de7499064d337f730838316dafd709
+    pay:
+        mchid: 1609190241 #商户id
+        serialNo: 722732039F4AEF9E05E79D91E576C3E0D413B539 #支付序列号
+        apiKey3: 6e684e2dd1fd541cc1a675aef8c0e21b #支付key
+        apiKey2: 6e684e2dd1fd541cc1a675aef8c0e21b #支付key
+        notifyUrl: https://wxpay.zngue.com/payment/asyNotice #回调地址
+        apiclientKeyPath: config/wxpay/apiclient_key.pem #支付私钥
+        isProd: false #是否正式开发环境

@@ -1,0 +1,8 @@
+wechatApplets:
+    base:
+        appid: wx914530ce085b91fa
+        appsecret: b79356a6f087b40cb75ab50d7113d6c8
+    pay:
+        mchid: 1609190241
+        apiKey3: 6e684e2dd1fd541cc1a675aef8c0e21b
+        apiKey2: 6e684e2dd1fd541cc1a675aef8c0e21b

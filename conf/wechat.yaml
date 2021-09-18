@@ -1,0 +1,14 @@
+wechat: #码支付
+    base:
+        appid: wx62bfb361143b3984
+        appsecret: b3bd560fcaeae1ae6b45c6e1550ce777
+    pay:
+        mchid: 1610070584  #商户id
+        serialNo: 2DA59BA3975388368FCAB0D752A4E778E4C6B927 #支付序列号
+        apiKey3: 6e684e2dd1fd541cc1a675aef8c0e21b #支付key
+        apiKey2: 6e684e2dd1fd541cc1a675aef8c0e21b #支付key
+        notifyUrl: https://pay.zngue.com/payment/asyNotice #回调地址
+        apiclientKeyPath: conf/wxpay/apiclient_key.pem #支付私钥
+        apiclientCerPath: conf/wxpay/apiclient_cert.pem #支付私钥
+        apiclientCer12Path: "conf/wxpay/apiclient_cert.p12" #支付私钥
+        isProd: true #是否正式开发环境
