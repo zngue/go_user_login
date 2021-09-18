@@ -29,7 +29,7 @@ type ScanResp struct {
 	Code    string
 }
 type Message interface {
-	SetMessage(ctx *gin.Context, token string)
+	SetMessage(ctx *gin.Context, id string)
 	QrcodeCreate(token string, action string) (string, string)
 }
 type wechatMessage struct {
@@ -142,9 +142,9 @@ func (m *wechatMessage) GetAccount(accentReq *request.AccountRequest) (*model.Ac
 	return NewAccount().Detail(accentReq)
 }
 
-func (m *wechatMessage) SetMessage(ctx *gin.Context, token string) {
+func (m *wechatMessage) SetMessage(ctx *gin.Context, id string) {
 	var accountReq request.AccountRequest
-	accountReq.Token = token
+	accountReq.ID = cast.ToInt(id)
 	office, err := m.GetOffice(&accountReq)
 	if err != nil {
 		return

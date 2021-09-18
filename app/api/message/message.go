@@ -13,11 +13,11 @@ type Data struct {
 }
 
 func Token(ctx *gin.Context) {
-	token := ctx.DefaultQuery("id", "1")
-	if len(token) == 0 {
+	id := ctx.DefaultQuery("id", "1")
+	if len(id) == 0 {
 		return
 	}
-	service.NewMessage().SetMessage(ctx, token)
+	service.NewMessage().SetMessage(ctx, id)
 }
 func QrcodeCreate(ctx *gin.Context) {
 	token := ctx.DefaultQuery("token", "znhjaldakljdfsdad")
