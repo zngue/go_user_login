@@ -16,6 +16,12 @@ func Verification(ctx *gin.Context) {
 		rep.Error(ctx, rep.Err(err))
 		return
 	}
+	if req.VAction == "code" {
+		if req.VCode == 0 {
+			rep.Error(ctx, rep.Msg("验证码不能为空"), rep.Code(422))
+		}
+	}
+
 	if req.UserStr == "" {
 		rep.Error(ctx, rep.Msg("无效参数"), rep.Code(422))
 		return

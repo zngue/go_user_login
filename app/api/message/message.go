@@ -17,6 +17,7 @@ func Token(ctx *gin.Context) {
 		return
 	}
 	service.NewMessage().SetMessage(ctx, id)
+
 }
 func QrcodeCreate(ctx *gin.Context) {
 	id := ctx.DefaultQuery("id", "")
