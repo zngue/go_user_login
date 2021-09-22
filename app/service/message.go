@@ -28,9 +28,14 @@ type ScanResp struct {
 	UserStr string
 	Code    string
 }
+type DataLogin struct {
+	ImgUrl     string `json:"imgUrl"`
+	RandStr    string `json:"randStr"`
+	ExpireTime int    `json:"expireTime"`
+}
 type Message interface {
 	SetMessage(ctx *gin.Context, id string)
-	QrcodeCreate(id string, action string) (string, string)
+	QrcodeCreate(id string, action string) (data *DataLogin, err error)
 }
 type wechatMessage struct {
 }
@@ -111,23 +116,34 @@ func (m *wechatMessage) MixMessageAnalysis(mixMessage *message.MixMessage, offic
 	return nil, nil
 }
 
-func (m *wechatMessage) QrcodeCreate(id string, action string) (string, string) {
+func (m *wechatMessage) QrcodeCreate(id string, action string) (dataLogin *DataLogin, err error) {
 	var accountReq request.AccountRequest
 	accountReq.ID = cast.ToInt(id)
-	office, err := m.GetOffice(&accountReq)
+	office, errs := m.GetOffice(&accountReq)
+	if errs != nil {
+		return nil, errs
+	}
 	basics := office.GetBasic()
+	expireTime := 300
 	var data = basic.Request{
-		ExpireSeconds: 14440,
+		ExpireSeconds: int64(expireTime),
 		ActionName:    "QR_STR_SCENE",
 	}
 	randomString := util.GetRandomString(10)
 	SceneStr := fmt.Sprintf(`{"type":1,"action":"%s","userstr":"%s"}`, action, randomString)
 	data.ActionInfo.Scene.SceneID = 1
 	data.ActionInfo.Scene.SceneStr = SceneStr
-	ticket, err := basics.GetQRTicket(&data)
-	fmt.Println(err)
-	code := basic.ShowQRCode(ticket)
-	return code, randomString
+	ticket, errQr := basics.GetQRTicket(&data)
+	if errQr != nil {
+		return nil, errQr
+	}
+	imageUrl := basic.ShowQRCode(ticket)
+	return &DataLogin{
+		ImgUrl:     imageUrl,
+		RandStr:    randomString,
+		ExpireTime: expireTime,
+	}, nil
+
 }
 func (m *wechatMessage) GetOffice(accentReq *request.AccountRequest) (*officialaccount.OfficialAccount, error) {
 	accountOne, err := m.GetAccount(accentReq)
