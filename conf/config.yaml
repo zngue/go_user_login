@@ -1,8 +1,10 @@
 AppMode: debug               # 开发模式, debug, release, test
-AppPort: 6069                  # HTTP绑定端口
 AppReadTimeout: 120
 AppWriteTimeout : 120
-AppName: shangyou_go_bang              # API Server的名字
+AppPort: 6069                  # HTTP绑定端口
+AppTitle: 用户中心
+AppHost: 127.0.0.1
+AppName: userCenter
 url: http://127.0.0.1:7001   # pingServer函数请求的API服务器的ip:port
 ErrReport : false
 SystemId : 1

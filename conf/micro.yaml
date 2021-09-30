@@ -6,5 +6,6 @@ micro:
         user: 127.0.0.1:8082
         cate: 127.0.0.1:8083
         cates: 127.0.0.1:8084
+        registerCenter: http://127.0.0.1:6006
 
 

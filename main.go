@@ -18,6 +18,7 @@ func main() {
 			group := engine.Group("point")
 			router.Router(group)
 		}),
+		common_run.IsRegisterCenter(true),
 	)
 
 }
