@@ -4,3 +4,4 @@ LoadConfig:
     micro:
     grpc:
     wechat:
+    jwt:

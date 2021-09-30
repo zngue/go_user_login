@@ -4,7 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/zngue/go_user_login/app/api/account"
 	"github.com/zngue/go_user_login/app/api/message"
+	"github.com/zngue/go_user_login/app/api/user"
 	"github.com/zngue/go_user_login/app/api/verification"
+	"github.com/zngue/go_user_login/app/middleware"
 )
 
 // Router /*
@@ -23,6 +25,11 @@ func Router(group *gin.RouterGroup) {
 	verificationGroup := group.Group("verification")
 	{
 		verificationGroup.GET("verify", verification.Verification)
+	}
+	userRouter := group.Group("user").Use(middleware.TokenCheck())
+
+	{
+		userRouter.GET("userInfo", user.GetUserInfo)
 	}
 
 }

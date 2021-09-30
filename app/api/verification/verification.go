@@ -20,8 +20,9 @@ func Verification(ctx *gin.Context) {
 		if req.VCode == 0 {
 			rep.Error(ctx, rep.Msg("验证码不能为空"), rep.Code(422))
 		}
+	} else {
+		req.VAction = ""
 	}
-
 	if req.UserStr == "" {
 		rep.Error(ctx, rep.Msg("无效参数"), rep.Code(422))
 		return
@@ -33,8 +34,8 @@ func Verification(ctx *gin.Context) {
 	}
 	if detail.Action == "code" && detail.ExpireTime < int(time.Now().Unix()) {
 		if detail.ExpireTime < int(time.Now().Unix()) {
-			rep.Error(ctx, rep.Msg("验证码失效请重新获取"))
-			return
+			//rep.Error(ctx, rep.Msg("验证码失效请重新获取"))
+			//return
 		}
 	}
 	var userReq request.UserRequest
@@ -44,7 +45,7 @@ func Verification(ctx *gin.Context) {
 		rep.Error(ctx, rep.Err(errs))
 		return
 	}
-	token, errToken := new(jwt.AuthJwt).CreateToken(&user)
+	token, errToken := new(jwt.AuthJwt).CreateToken(user)
 	if errToken != nil {
 		rep.Error(ctx, rep.Err(errToken))
 		return
